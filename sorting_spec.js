@@ -2,12 +2,8 @@ describe('Bubble Sort', function(){
   var spies;
 
   beforeEach(function() {
-    spies = {
-      swap: swap,
-      isBigger: isBigger
-    };
-    spyOn(spies, 'swap');
-    spyOn(spies, 'isBigger');
+    spyOn(window, 'swap').and.callThrough();
+    spyOn(window, 'isBigger').and.callThrough();
   });
 
   it('handles an empty array', function(){
@@ -18,11 +14,10 @@ describe('Bubble Sort', function(){
     expect( bubbleSort([5]) ).toEqual( [5] );
   });
 
-  xit('handles an array with multiple items', function(){
-    // console.log(JSON.stringify(swap));
-    expect(spies.swap.calls.count()).toEqual(4);
-    expect(spies.isBigger.calls.count()).toEqual(12);
+  it('handles an array with multiple items', function(){
     expect( bubbleSort([5, 4, 634, 1]) ).toEqual( [1, 4, 5, 634] );
+    expect(swap.calls.count()).toEqual(4);
+    expect(isBigger.calls.count()).toEqual(12);
   });
 
 });
@@ -30,8 +25,7 @@ describe('Bubble Sort', function(){
 describe('Merge Sort -', function() {
   
   it(' merge is able to merge two sorted arrays', function(){
-    debugger;
-    expect( merge([1, 2], [3, 4])).toEqual([1, 2, 3, 4])
+    expect( merge([1, 2], [3, 4])).toEqual([1, 2, 3, 4]);
   });
 
   it(' split is able to split one array into two halves', function(){
