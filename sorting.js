@@ -4,27 +4,29 @@ function bubbleSort(array) {
 		numSwap = 0;
 		for(var i = 0; i < array.length - 1; i++) {
 			if(isBigger(array[i], array[i + 1])) { 
-				swap(array, i, i + 1);
+				swap(array, i);
 				numSwap++;
-			};
-		};
-	};
+			}
+		}
+	}
 
 	return array;
 
-};
+}
 
-function swap(array, index1, index2) {
-	var first = array[index1];
-	array[index1] = array[index2];
-	array[index2] = first;
-};
+function swap(array, index) {
+	var first = array[index];
+	array[index] = array[index + 1];
+	array[index + 1] = first;
+}
 
 function isBigger(num1, num2) {
-	if (!num1 || num2 == 0) return true;
-	if (!num2 || num1 == 0) return false;
+  if (num1 === 0) num1 = -1;
+  if (num2 === 0) num2 = -1;
+	if (!num1 || num2 === 0) return true;
+	if (!num2 || num1 === 0) return false;
 	return num1 > num2;
-};
+}
 
 function merge(arr1, arr2) {
 	var returnArr = [];
@@ -46,7 +48,8 @@ function merge(arr1, arr2) {
 
 function split(arr) {
 	var middle = Math.ceil(arr.length / 2);
-	return [arr.slice(0, middle), arr.slice(middle)];
+  var right = arr.splice(middle)
+	return [arr, right];
 }
 
 function mergeSort(arr) {
@@ -63,7 +66,30 @@ function mergeSort(arr) {
 }
 
 
+for(var i=12; i <= 17; i++) {
+    var num_items = Math.pow(2,i);
+    var native_test_array = [];
+    var b_test_array = [];
+    var m_test_array = [];
+    for(var j=0; j < num_items; j++) {
+        var rand = Math.floor(Math.random() * num_items);
+        native_test_array.push(rand);
+        b_test_array.push(rand);
+        m_test_array.push(rand);
+    }
 
+    console.time(num_items + " native");
+    native_test_array.sort(function(a,b){ return a-b; });
+    console.timeEnd(num_items + " native");
+    
+    console.time(num_items + " bubble");
+    bubbleSort(b_test_array);
+    console.timeEnd(num_items + " bubble");
+
+    console.time(num_items + " merge");
+    mergeSort(m_test_array);
+    console.timeEnd(num_items + " merge");  
+}
 
 
 

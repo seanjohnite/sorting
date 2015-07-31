@@ -20,6 +20,19 @@ describe('Bubble Sort', function(){
     expect(isBigger.calls.count()).toEqual(12);
   });
 
+  it('handles an array with a whole big ton of items', function(){
+    var randomArray = [];
+    var n = Math.floor(Math.random() * 100);
+    while (n--) {
+      var randomNum = Math.floor(Math.random() * 10);
+      randomArray.push(randomNum);
+    }
+    var sortedArray = 
+    expect( bubbleSort([5, 4, 634, 1]) ).toEqual( [1, 4, 5, 634] );
+    expect(swap.calls.count()).toEqual(4);
+    expect(isBigger.calls.count()).toEqual(12);
+  });
+
 });
 
 describe('Merge Sort -', function() {
